@@ -1,0 +1,18 @@
+home-assistant:
+  version: 2025.8.3
+  known_devices: {}
+  automations: {}
+  configuration:
+    default_config:
+    frontend:
+      themes: !include_dir_merged_named themes
+    automation: !include automations.yaml
+    http:
+      use_x_forwarded_for: true
+      trusted_proxies:
+        - 10.10.0.0/16
+
+  ingress:
+    hostName: ha.dev.k8s-frambozen.nl
+    tls: staging
+

@@ -1,0 +1,4 @@
+chart:
+  repo_url: https://github.com/K8S-Frambozen/ha/home-assistant/helm-chart
+  name: home-assistant
+  version: 0.9.0

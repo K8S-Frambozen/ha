@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zwavejs2mqtt
+  labels:
+    app: zwavejs2mqtt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zwavejs2mqtt
+  template:
+    metadata:
+      labels:
+        app: zwavejs2mqtt
+    spec:
+      containers:
+      - name: zwavejs2mqtt
+        image: zwavejs/zwavejs2mqtt:11.2.1
+        ports:
+        - containerPort: 8091
+        - containerPort: 3000
+        volumeMounts:
+        - mountPath: /usr/src/app/store
+          name: configuration
+        - mountPath: /dev/ttyACM0
+          name: zwave
+        securityContext:
+          privileged: true
+      volumes:
+      - name: configuration
+        persistentVolumeClaim:
+            claimName: zwavejs2mqtt-pvc
+#        hostPath:
+#          path: /tmp/zwavejs2mqtt
+#          type: DirectoryOrCreate
+      - name: zwave
+        hostPath:
+          path: /dev/ttyACM0

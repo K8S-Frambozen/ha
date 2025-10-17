@@ -5,3 +5,6 @@ metadata:
 data:
   configuration.yaml: |
     {{- tpl .Values.configuration . | nindent 4 }}
+  automation.yaml: |
+    {{- tpl .Values.configuration . | nindent 4 }}
+  

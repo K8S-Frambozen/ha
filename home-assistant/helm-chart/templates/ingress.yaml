@@ -6,14 +6,14 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
     kubernetes.io/ingress.class: "traefik"
-    cert-manager.io/cluster-issuer: "letsencrypt-{{ .Values.tls }}"
+    cert-manager.io/cluster-issuer: "letsencrypt-{{ .Values.ingress.tls }}"
 spec:
   tls:
   - hosts:
-    - {{ .Values.hostName }}
-    secretName: local-k8s-frambozen-nl-tls-{{ .Values.tls }}-cert
+    - {{ .Values.ingress.hostName }}
+    secretName: local-k8s-frambozen-nl-tls-{{ .Values.ingress.tls }}-cert
   rules:
-  - host: {{ .Values.hostName }}
+  - host: {{ .Values.ingress.hostName }}
     http:
       paths:
       - path: /

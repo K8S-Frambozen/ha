@@ -2,16 +2,25 @@ image:
   version: 2025.8.3
 known_devices: |
 automations: |
-configuration:
+configuration: |-
   default_config:
+  
   frontend:
     themes: !include_dir_merged_named themes
+  
+  tts:
+    - platform: google_translate
+
   automation: !include automations.yaml
+  script: !include scripts.yaml
+  scene: !include scene.yaml
+
   http:
     use_x_forwarded_for: true
     trusted_proxies:
       - 127.0.0.1
-      - 10.10.0.0/16
+      - 10.42.0.0/16
+      - ::1
 
 ingress:
   hostName: ha.dev.k8s-frambozen.nl

@@ -4,8 +4,8 @@ metadata:
   name: home-assistant-configmap
 data:
   known_devices.yaml: |
-    {{ .Values.known_devices | toYaml }}
+    {{ .Values.known_devices }}
   automations.yaml: |
-    {{ .Values.automations | toYaml }}
+    {{ .Values.automations }}
   configuration.yaml: |
-    {{ .Values.configuration | toYaml }}
+    {{ .Values.configuration }}

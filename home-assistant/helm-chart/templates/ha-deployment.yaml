@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: home-assistant
+  name: home-assistant-deployment
   labels:
     app: home-assistant
 spec:

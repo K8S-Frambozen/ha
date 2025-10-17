@@ -1,7 +1,7 @@
 image:
   version: 2025.8.3
-known_devices: |
-automations: |
+known_devices: 
+automations: 
 configuration: |-
   default_config:
   

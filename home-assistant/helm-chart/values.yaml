@@ -18,9 +18,9 @@ configuration: |-
   http:
     use_x_forwarded_for: true
     trusted_proxies:
-      - 127.0.0.1
+      - 192.168.0.0/16
       - 10.42.0.0/16
-      - 192.168.185.162/16
+      - 127.0.0.1
       - ::1
 
 ingress:

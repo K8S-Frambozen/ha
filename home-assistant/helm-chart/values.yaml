@@ -176,7 +176,7 @@ livenessProbe:
   httpGet:
     path: /
     port: http
-    
+
 readinessProbe:
   httpGet:
     path: /
@@ -184,8 +184,8 @@ readinessProbe:
 
 startupProbe:
   httpGet:
-    path: /healthz
-    port: liveness-port
+    path: /
+    port: http
   failureThreshold: 30
   periodSeconds: 10
 

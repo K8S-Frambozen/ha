@@ -2,14 +2,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: zwavejs2mqtt-deployment
+  name: {{ include "home-assistant.fullname" . }}-zwavejs2mqtt
   labels:
-    app: zwavejs2mqtt
+    {{- include "home-assistant.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: zwavejs2mqtt
+      {{- include "home-assistant.selectorLabels" . | nindent 6 }}
+      type: zwavejs2mqtt
   template:
     metadata:
       labels:

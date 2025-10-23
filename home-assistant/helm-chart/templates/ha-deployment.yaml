@@ -114,7 +114,7 @@ spec:
             path: {{ .Values.persistence.hostPath }}
           {{- else }}
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "miniserve.fullname" . }}{{- end }}
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "home-assistant.fullname" . }}{{- end }}
           {{- end }}
         {{- end }}
         {{- with .Values.volumes }}

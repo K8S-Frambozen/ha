@@ -176,12 +176,18 @@ livenessProbe:
   httpGet:
     path: /
     port: http
-    initialDelaySeconds: 120
+    
 readinessProbe:
   httpGet:
     path: /
     port: http
-    initialDelaySeconds: 360
+
+startupProbe:
+  httpGet:
+    path: /healthz
+    port: liveness-port
+  failureThreshold: 30
+  periodSeconds: 10
 
 autoscaling:
   enabled: false

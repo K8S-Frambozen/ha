@@ -1,3 +1,8 @@
 apiVersion: v2
 name: home-assistant
-version: 0.1.0
+description: Home Assistant with tooling to run on an k3s pi
+icon: https://www.home-assistant.io/images/favicon-192x192.png
+type: application
+version: "0.1"
+# renovate: image=ghcr.io/home-assistant/home-assistant
+appVersion: "2025.10.3"

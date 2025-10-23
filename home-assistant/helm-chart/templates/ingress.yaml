@@ -1,25 +1,56 @@
+{{- if .Values.ingress.enabled -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: home-assistant-ingress
+  name: {{ include "home-assistant.fullname" . }}
+  labels:
+    {{- include "home-assistant.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    kubernetes.io/ingress.class: "traefik"
-    cert-manager.io/cluster-issuer: "letsencrypt-{{ .Values.ingress.tls }}"
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
+  {{- with .Values.ingress.className }}
+  ingressClassName: {{ . }}
+  {{- end }}
+  {{- with .Values.ingress.tls }}
   tls:
-  - hosts:
-    - {{ .Values.ingress.hostName }}
-    secretName: local-k8s-frambozen-nl-tls-{{ .Values.ingress.tls }}-cert
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   rules:
-  - host: {{ .Values.ingress.hostName }}
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: home-assistant-service
-            port:
-              number: 80
+    {{- range .Values.ingress.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "home-assistant.fullname" $ }}
+                port:
+                  name: http
+          {{- if and $.Values.zigbee2mqtt.enabled (not $.Values.zigbee2mqtt.ingress.hosts) }}
+          - path: /zigbee2mqtt
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "home-assistant.fullname" $ }}-zigbee2mqtt
+                port:
+                  name: http
+          {{- end }}
+    {{- end }}
+    {{- if $.Values.zigbee2mqtt.enabled }}
+    {{- range .Values.zigbee2mqtt.ingress.hosts }}
+    - host: {{ . | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "home-assistant.fullname" $ }}-zigbee2mqtt
+                port:
+                  name: http
+    {{- end }}
+    {{- end }}
+{{- end }}

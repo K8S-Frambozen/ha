@@ -1,0 +1,23 @@
+{{- if .Values.zwavejs2mqtt.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "home-assistant.fullname" . }}-zwavejs2mqtt
+  labels:
+    {{- include "home-assistant.labels" . | nindent 4 }} 
+spec:
+  selector:
+    {{- include "home-assistant.selectorLabels" . | nindent 4 }}
+    type: zwavejs2mqtt
+  type: {{ .Values.service.type }}
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8091
+    targetPort: 8091
+    nodePort: 30091
+  - name: ws
+    protocol: TCP
+    port: 3000
+    targetPort: 3000
+{{- end }}

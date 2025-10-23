@@ -1,0 +1,21 @@
+{{- if .Values.zigbee2mqtt.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "home-assistant.fullname" . }}-zigbee2mqtt
+  labels:
+    {{- include "home-assistant.labels" . | nindent 4 }}
+data:
+  ZIGBEE2MQTT_CONFIG_MQTT_SERVER: {{ printf "mqtt://%s-nats:%v" (include "home-assistant.fullname" .) .Values.nats.service.port.mqtt }}
+  ZIGBEE2MQTT_CONFIG_ADVANCED_LOG_OUTPUT: '["console"]'
+  {{- with .Values.zigbee2mqtt.config }}
+  {{- with .homeassistant }}
+  {{- with .enabled }}
+  ZIGBEE2MQTT_CONFIG_HOMEASSISTANT_ENABLED: {{ . | quote }}
+  {{- end }}
+  {{- end }}
+  {{- range $key, $value := .serial}}
+  ZIGBEE2MQTT_CONFIG_SERIAL_{{ $key | upper }}: {{ $value | quote }}
+  {{- end }}
+  {{- end }}
+{{- end }}

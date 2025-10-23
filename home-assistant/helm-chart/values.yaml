@@ -1,29 +1,208 @@
+replicaCount: 1
+
+global:
+  image:
+    # -- if set it will overwrite all registry entries
+    registry:
+    # -- if set it will overwrite all pullPolicy
+    pullPolicy:
+
 image:
-  version: 2025.8.3
-known_devices: 
-automations: |
-configuration: |-
-  default_config:
-  
-  frontend:
-    themes: !include_dir_merge_named themes
-  
-  tts:
-    - platform: google_translate
+  registry: ghcr.io
+  repository: home-assistant/home-assistant
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
-  automation: !include automations.yaml
-  script: !include scripts.yaml
-  scene: !include scene.yaml
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
 
-  http:
-    use_x_forwarded_for: true
-    trusted_proxies:
-      - 192.168.0.0/16
-      - 10.42.0.0/16
-      - 127.0.0.1
-      - ::1
+nats:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: library/nats
+    pullPolicy: IfNotPresent
+    tag: "2.12.0-scratch"
+  service:
+    port:
+      nats: 4222
+      mqtt: 1883
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  livenessProbe:
+    tcpSocket:
+      port: nats
+  readinessProbe:
+    tcpSocket:
+      port: nats
+
+mosquitto:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: arm64v8/eclipse-mosquitto
+    pullPolicy: IfNotPresent
+  securityContext:
+    privileged: true
+
+zigbee2mqtt:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: koenkk/zigbee2mqtt
+    pullPolicy: IfNotPresent
+    tag: 2.6.1
+  device: /dev/ttyACM0
+  securityContext:
+    privileged: true
+  ingress:
+    hosts: []
+  config:
+    homeassistant:
+      enabled: true
+    serial:
+      port: /dev/ttyACM0
+
+prometheus:
+  podmonitor:
+    enabled: false
+    labels: {}
+    bearerTokenSecret: {}
+
+zwavejs2mqtt:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: zwavejs/zwavejs2mqtt
+    pullPolicy: IfNotPresent
+    tag: "7.7.1"
+  device: /dev/ttyACM0
+  securityContext:
+    privileged: true
+  ingress:
+    hosts: []
+  config:
+    server:
+      port: 3000
+    zwavejs:
+      serialPort: /dev/ttyACM0
+
+persistence:
+  enabled: false
+  annotations: {}
+  # --  data Persistent Volume Storage Class
+  # If defined, storageClassName: <storageClass>
+  # If set to "-", storageClassName: "", which disables dynamic provisioning
+  # If undefined (the default) or set to null, no storageClassName spec is
+  #   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  #   GKE, AWS & OpenStack)
+  #
+  storageClass:
+
+  # -- A manually managed Persistent Volume and Claim
+  # Requires persistence.enabled: true
+  # If defined, PVC must be created manually before volume will be bound
+  existingClaim:
+
+  ## use container hostPatch or an PV if you set storageClass to manual
+  hostPath:
+  accessMode: ReadWriteOnce
+  size: 1Gi
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # -- If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
 
 ingress:
-  hostName: ha.dev.k8s-frambozen.nl
-  tls: staging
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
 
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# Additional volumes on the output Deployment definition.
+volumes: []
+# - name: foo
+#   secret:
+#     secretName: mysecret
+#     optional: false
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts: []
+# - name: foo
+#   mountPath: "/etc/foo"
+#   readOnly: true
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

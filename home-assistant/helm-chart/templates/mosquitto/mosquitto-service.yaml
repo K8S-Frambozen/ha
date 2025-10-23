@@ -1,0 +1,22 @@
+{{- if .Values.mosquitto.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "home-assistant.fullname" . }}-mosquitto
+  labels:
+    {{- include "home-assistant.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "home-assistant.selectorLabels" . | nindent 4 }}
+    type: mosquitto
+  type: {{ .Values.service.type }}
+  ports:
+  - name: mqtt
+    protocol: TCP
+    port: 1883
+    targetPort: 1883
+  - name: mqtt1
+    protocol: TCP
+    port: 9001
+    targetPort: 9001
+{{- end }}

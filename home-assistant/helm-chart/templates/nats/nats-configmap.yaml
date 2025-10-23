@@ -1,0 +1,17 @@
+{{- if .Values.nats.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "home-assistant.fullname" . }}-nats
+  labels:
+    {{- include "home-assistant.labels" . | nindent 4 }}
+data:
+  server.conf: |-
+    port: 4222
+    jetstream {
+      store_dir: /var/lib/nats
+    }
+    mqtt {
+     port: 1883
+    }
+{{- end }}

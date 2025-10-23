@@ -1,7 +1,9 @@
+{{- if .Values.nats.enabled }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "home-assistant.fullname" . }}
+  name: {{ include "home-assistant.fullname" . }}-nats
   labels:
     {{- include "home-assistant.labels" . | nindent 4 }}
 spec:
@@ -11,7 +13,7 @@ spec:
   selector:
     matchLabels:
       {{- include "home-assistant.selectorLabels" . | nindent 6 }}
-      app.kubernetes.io/component: home-assistant
+      type: nats
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -20,7 +22,7 @@ spec:
       {{- end }}
       labels:
         {{- include "home-assistant.labels" . | nindent 8 }}
-        app.kubernetes.io/component: home-assistant
+        type: nats
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -36,34 +38,47 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          {{- with .Values.image }}
-          image: "{{ coalesce $.Values.global.image.registry .registry }}/{{ .repository }}:{{ .tag | default $.Chart.AppVersion }}"
+          {{- with .Values.nats.image }}
+          image: "{{ coalesce $.Values.global.image.registry .registry }}/{{ .repository }}:{{ .tag }}"
           imagePullPolicy: {{ coalesce $.Values.global.image.pullPolicy .pullPolicy }}
           {{- end }}
           ports:
-            - name: http
-              containerPort: 8123
+            - name: nats
+              containerPort: 4222
+              protocol: TCP
+            - name: mqtt
+              containerPort: 1883
               protocol: TCP
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+            {{- toYaml .Values.nats.livenessProbe | nindent 12 }}
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+            {{- toYaml .Values.nats.readinessProbe | nindent 12 }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.nats.resources | nindent 12 }}
           volumeMounts:
+            - name: config
+              mountPath: /nats-server.conf
+              subPath: nats-server.conf
+              readOnly: true
             {{- if .Values.persistence.enabled }}
             - name: data
-              mountPath: /config
+              mountPath: /var/lib/nats
             {{- end }}
             {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
       volumes:
+        - name: "config"
+          configMap:
+            name: {{ include "home-assistant.fullname" . }}-nats
+            items:
+              - key: "server.conf"
+                path: "nats-server.conf"
         {{- if .Values.persistence.enabled }}
         - name: "data"
           {{- if and .Values.persistence.hostPath (ne .Values.persistence.storageClass "manual" ) }}
           hostPath:
-            path: {{ .Values.persistence.hostPath }}
+            path: {{ .Values.persistence.hostPath }}/nats/
           {{- else }}
           persistentVolumeClaim:
             claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "miniserve.fullname" . }}{{- end }}
@@ -84,3 +99,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}

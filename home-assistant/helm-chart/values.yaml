@@ -235,6 +235,12 @@ configuration:
     # Loads default set of integrations. Do not remove.
     default_config:
 
+    {{- if .Values.configuration.user_tracking }}
+    device_tracker:
+      {{- range .Values.configuration.user_tracking }}
+        - {{ . }}
+      {{- end }} 
+    {{- end }}
     {{- if or .Values.ingress.enabled .Values.ingress.external }}
     http:
       use_x_forwarded_for: true

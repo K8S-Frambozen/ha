@@ -15,6 +15,11 @@ ingress:
       hosts:
         - ha.dev.k8s-frambozen.nl
 
+configuration:
+  user_tracking:
+    - platform: google_maps
+      username: "ralph.smeets@gmail.com"
+
 persistence:
   enabled: true
   storageClass: "nfs-client"

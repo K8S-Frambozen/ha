@@ -15,7 +15,7 @@ ingress:
       hosts:
         - ha.dev.k8s-frambozen.nl
 
-persistance:
+persistence:
   enabled: true
   storageClass: "nfs-client"
   accessModes:

@@ -81,7 +81,7 @@ spec:
             path: {{ .Values.persistence.hostPath }}/nats/
           {{- else }}
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "home-assistant.fullname" . }}{{- end }}
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "home-assistant.fullname" . }}-pvc{{- end }}
           {{- end }}
         {{- end }}
         {{- with .Values.volumes }}

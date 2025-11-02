@@ -32,6 +32,8 @@ mosquitto:
 
 nats:
   enabled: true
+  service:
+    type: LoadBalancer
 
 zigbee2mqtt:
   enabled: false

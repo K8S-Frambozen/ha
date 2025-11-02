@@ -26,6 +26,7 @@ nats:
     pullPolicy: IfNotPresent
     tag: "2.12.0-scratch"
   service:
+    type: ClusterIP
     port:
       nats: 4222
       mqtt: 1883

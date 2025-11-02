@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "home-assistant.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.nats.service.type }}
   selector:
     {{- include "home-assistant.selectorLabels" . | nindent 4 }}
     type: nats
@@ -18,5 +18,5 @@ spec:
     - name: mqtt
       port: {{ .Values.nats.service.port.mqtt }}
       protocol: TCP
-      targetPort: mqtt
+      targetPort: mqtt  
 {{- end }}

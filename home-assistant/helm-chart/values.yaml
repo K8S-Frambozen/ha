@@ -53,6 +53,8 @@ mosquitto:
     pullPolicy: IfNotPresent
   securityContext:
     privileged: true
+  service:
+    type: ClusterIP
 
 zigbee2mqtt:
   enabled: true
@@ -71,6 +73,8 @@ zigbee2mqtt:
       enabled: true
     serial:
       port: /dev/ttyACM0
+  service:
+    type: ClusterIP
 
 prometheus:
   podmonitor:
@@ -95,6 +99,8 @@ zwavejs2mqtt:
       port: 3000
     zwavejs:
       serialPort: /dev/ttyACM0
+  service:
+    type: ClusterIP
 
 persistence:
   enabled: false

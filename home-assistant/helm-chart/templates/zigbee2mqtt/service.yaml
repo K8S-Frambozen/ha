@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "home-assistant.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.zigbee2mqtt.service.type }}
   selector:
     {{- include "home-assistant.selectorLabels" . | nindent 4 }}
     type: zigbee2mqtt

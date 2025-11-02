@@ -9,7 +9,7 @@ spec:
   selector:
     {{- include "home-assistant.selectorLabels" . | nindent 4 }}
     type: mosquitto
-  type: {{ .Values.service.type }}
+  type: {{ .Values.mosquitto.service.type }}
   ports:
   - name: mqtt
     protocol: TCP

@@ -1,0 +1,18 @@
+objects:
+  - obj: "p0b1"  # temperature label on all pages
+    properties:
+      "text": '{{ states("sensor.my_room_temperature") }}°C'
+  - obj: "p1b2"  # light-switch toggle button
+    properties:
+      "val": '{{ 1 if states("light.my_room") == "on" else 0 }}'
+      "text": '{{ "\uE6E8" if is_state("light.my_room", "on") else "\uE335" | e }}'
+    event:
+      "up":
+        - service: homeassistant.toggle
+          entity_id: "light.my_room"
+  - obj: "p1b3"  # dropdown
+    event:
+      "changed":
+        - service: persistent_notification.create
+          data:
+            message: I like {{ text }}

@@ -1,0 +1,10 @@
+{{- if .Values.openhasp.enabled -}}
+{{- range $path, $_ := .Files.Glob "**/plates.jsonl"}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "home-assistant.fullname" . }}-{{ . }}
+data:
+{{ (.Files.Glob "$path/*").AsConfig | indent 2 }}
+{{- end -}}
+{{- end -}}

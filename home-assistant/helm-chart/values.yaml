@@ -18,6 +18,10 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+openhasp:
+  enabled: false
+  plates: []
+
 nats:
   enabled: true
   image:

@@ -6,20 +6,22 @@ ingress:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: 'true'
   hosts:
-    - host: ha.dev.k8s-frambozen.nl
+    - host: ha.k8s-frambozen.nl
       paths:
         path: /
         pathType: ImplementationSpecific
   tls:
     - secretName: home-assistant-tls
       hosts:
-        - ha.dev.k8s-frambozen.nl
+        - ha.dk8s-frambozen.nl
 
 configuration:
-  user_tracking:
-    - platform: google_maps
-      username: "ralph.smeets@gmail.com"
 
+openhasp:
+  enbled: true
+  plates:
+    - plate_4_3
+      
 persistence:
   enabled: true
   storageClass: "nfs-client"

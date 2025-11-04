@@ -21,7 +21,7 @@ fullnameOverride: ""
 openhasp:
   enabled: true
   definitions: {}
-  plates:
+  plates: []
     
 
 nats:

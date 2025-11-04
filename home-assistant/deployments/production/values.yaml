@@ -24,6 +24,7 @@ configuration:
 
 openhasp:
   enabled: true
+  
       
 persistence:
   enabled: true

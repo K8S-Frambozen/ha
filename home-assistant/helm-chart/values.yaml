@@ -19,8 +19,11 @@ nameOverride: ""
 fullnameOverride: ""
 
 openhasp:
-  enabled: false
-  plates: []
+  enabled: true
+  layouts:
+  mappings:
+  plates:
+    
 
 nats:
   enabled: true

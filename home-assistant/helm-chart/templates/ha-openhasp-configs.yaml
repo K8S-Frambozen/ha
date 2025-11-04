@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "home-assistant.fullname" . }}-openhasp_configs
+  name: {{ include "home-assistant.fullname" . }}-openhasp-configs
 data:
 {{- range $name, $val := .Values.openhasp.configs }}
   {{ $name }}: |-

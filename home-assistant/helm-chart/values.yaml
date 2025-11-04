@@ -327,6 +327,8 @@ configuration:
       touch /config/scenes.yaml
     fi
 
+    # Check if the openhasp 
+
   initContainer:
     name: setup-config
     image: mikefarah/yq:4

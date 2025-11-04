@@ -25,7 +25,7 @@ configuration:
 openhasp:
   enabled: true
   plates:
-    plate_4_3: |-
+    plate_4_3.jsonl: |-
       {"page":1,"id":1,"obj":"btn","x":0,"y":0,"w":800,"h":30,"text":"openHASP","value_font":22,"bg_color":"#2C3E50","text_color":"#FFFFFF","radius":0,"border_side":0}
       {"page":1,"id":2,"obj":"btn","x":10,"y":30,"w":105200,"h":90,"toggle":true,"text":"\uE335","text_font":32,"mode":"break","align":1}
       {"page":1,"id":3,"obj":"dropdown","x":10,"y":120,"w":300,"h":60,"options":"Apples\nBananas\nOranges\nMelon"}

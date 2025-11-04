@@ -329,8 +329,13 @@ configuration:
       touch /config/scenes.yaml
     fi
 
-    mkdir -p /config/openhasp-configs
-    mkdir -p /config/openhasp-plates
+    if [ ! -d /config/openhasp-configs ]; then
+      mkdir -p /config/openhasp-configs
+    fi
+
+    if [ ! -d /config/openhasp-plates ]; then
+      mkdir -p /config/openhasp-plates
+    fi
 
     # Check if the openhasp exists
     openhasp="{{ .Values.openhasp.enabled }}"

@@ -330,10 +330,12 @@ configuration:
     fi
 
     if [ ! -d /config/openhasp-configs ]; then
+      echo "OpenHASP configs directory not found, creating a new one"
       mkdir -p /config/openhasp-configs
     fi
 
     if [ ! -d /config/openhasp-plates ]; then
+      echo "OpenHASP plates directory not found, creating a new one"
       mkdir -p /config/openhasp-plates
     fi
 

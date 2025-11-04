@@ -55,9 +55,6 @@ openhasp:
                 - service: persistent_notification.create
                   data:
                     message: I like {{ text }}
-
-    
-
       
 persistence:
   enabled: true

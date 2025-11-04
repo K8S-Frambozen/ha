@@ -20,18 +20,8 @@ fullnameOverride: ""
 
 openhasp:
   enabled: true
-  definitions:
-    definition1:
-      layout: |-
-        {}
-      config: |-
-        {}
-  plates:
-    plater1:
-      layout: definition1
-      config: definition1
-
-    
+  configs: {}
+  plates: {}
 
 nats:
   enabled: true

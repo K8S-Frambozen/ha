@@ -1,11 +1,11 @@
 {{- if .Values.openhasp.enabled -}}
-{{- range $name, $val := .Values.openhasp.plates }}
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: openhasp-{{ $name }}
 data:
-  {{ .name }}: |-
-{{ get $.Values.openhasp.definitions ( get $val "config" ) | indent 4 }}
+{{- range $name, $val := .Values.openhasp.configs }}
+  {{ .name }}: {{ $val }}
 {{- end -}}
 {{- end -}}

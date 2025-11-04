@@ -6,6 +6,6 @@ metadata:
   name: openhasp-{{ $name }}
 data:
 {{- range $name, $val := .Values.openhasp.configs }}
-  {{ .name }}: {{ $val }}
+  {{ $name }}: {{ $val }}
 {{- end -}}
 {{- end -}}

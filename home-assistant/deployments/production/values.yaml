@@ -21,11 +21,9 @@ configuration:
     - 172.16.0.0/12
     - 192.168.0.0/16
     - 127.0.0.0/8
-    
+
 openhasp:
-  enbled: true
-  plates:
-    - plate_4_3
+  enabled: true
       
 persistence:
   enabled: true

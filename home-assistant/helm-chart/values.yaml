@@ -20,7 +20,7 @@ fullnameOverride: ""
 
 openhasp:
   enabled: true
-  definitions: 
+  definitions: {}
   plates:
     
 

@@ -20,8 +20,7 @@ fullnameOverride: ""
 
 openhasp:
   enabled: true
-  layouts:
-  mappings:
+  definitions: 
   plates:
     
 

@@ -1,0 +1,12 @@
+{{- if .Values.openhasp.enabled -}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "home-assistant.fullname" . }}-openhasp_plates
+data:
+{{- range $name, $val := .Values.openhasp.plates }}
+  {{ $name }}: |-
+{{ $val | indent 4 }}
+{{- end }}
+{{- end -}}

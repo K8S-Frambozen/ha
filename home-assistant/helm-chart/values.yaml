@@ -18,6 +18,11 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+openhasp:
+  enabled: true
+  configs: {}
+  plates: {}
+
 nats:
   enabled: true
   image:
@@ -264,6 +269,10 @@ configuration:
     script: !include scripts.yaml
     scene: !include scenes.yaml
 
+    {{- if .Values.openhasp.enabled }}
+    opebnhasp: !include_dir_merge_named openhasp_configs
+    {{- end }}
+
   # Init script for the Home Assistant initialization, you can use Go template functions
   # Script is executed before the Home Assistant container starts and is used to prepare the configuration
   # Will be executed only if the configuration.enabled is set to true
@@ -320,6 +329,20 @@ configuration:
       touch /config/scenes.yaml
     fi
 
+    # Check if the openhasp exists
+    openhasp="{{ .Values.openhasp.enabled }}""
+    if [ ! -d openhasp-configs ]; then
+      mkdir openhasp-configs
+    fi
+    cp /openhasp-configs/* openhasp-configs
+
+    if [ ! -d openhasp-plates ]; then
+      mkdir openhasp-plates
+    fi
+    cp /openhasp-plates/* openhasp-plates
+  
+
+
   initContainer:
     name: setup-config
     image: mikefarah/yq:4
@@ -341,3 +364,7 @@ configuration:
         subPath: init.sh
       - name: config-volume
         mountPath: /config-templates
+      - name: openhasp-configs-volume
+        mountPath: /openhasp-configs
+      - name: openhasp-plates-volume
+        mountPath: /openhasp-plates

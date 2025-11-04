@@ -6,20 +6,50 @@ ingress:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: 'true'
   hosts:
-    - host: ha.dev.k8s-frambozen.nl
+    - host: ha.k8s-frambozen.nl
       paths:
         path: /
         pathType: ImplementationSpecific
   tls:
     - secretName: home-assistant-tls
       hosts:
-        - ha.dev.k8s-frambozen.nl
-
+        - ha.dk8s-frambozen.nl
 configuration:
-  user_tracking:
-    - platform: google_maps
-      username: "ralph.smeets@gmail.com"
+  enabled: true
+  trusted_proxies:
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+    - 127.0.0.0/8
 
+openhasp:
+  enabled: true
+  plates:
+    plate_4_3.jsonl: |-
+      {"page":1,"id":1,"obj":"btn","x":0,"y":0,"w":800,"h":30,"text":"openHASP","value_font":22,"bg_color":"#2C3E50","text_color":"#FFFFFF","radius":0,"border_side":0}
+      {"page":1,"id":2,"obj":"btn","x":10,"y":30,"w":105200,"h":90,"toggle":true,"text":"\uE335","text_font":32,"mode":"break","align":1}
+      {"page":1,"id":3,"obj":"dropdown","x":10,"y":120,"w":300,"h":60,"options":"Apples\nBananas\nOranges\nMelon"}
+      {"page":0,"id":1,"obj":"label","x":700,"y":5,"h":60,"w":100,"text":"00.0°C","align":2,"bg_color":"#2C3E50","text_color":"#FFFFFF"}
+  configs:
+    plate_4_3.yaml: |-
+      - obj: "p0b1"  # temperature label on all pages
+        properties:
+          "text": '{{ states("sensor.my_room_temperature") }}°C'
+      - obj: "p1b2"  # light-switch toggle button
+        properties:
+          "val": '{{ 1 if states("light.my_room") == "on" else 0 }}'
+          "text": '{{ "\uE6E8" if is_state("light.my_room", "on") else "\uE335" | e }}'
+        event:
+          "up":
+            - service: homeassistant.toggle
+              entity_id: "light.my_room"
+      - obj: "p1b3"  # dropdown
+        event:
+          "changed":
+            - service: persistent_notification.create
+              data:
+                message: I like {{ text }}
+      
 persistence:
   enabled: true
   storageClass: "nfs-client"

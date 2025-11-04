@@ -6,6 +6,7 @@ metadata:
   name: {{ include "home-assistant.fullname" . }}-openhasp_configs
 data:
 {{- range $name, $val := .Values.openhasp.configs }}
-  {{ $name }}: {{ $val }}
+  {{ $name }}: |-
+{{ $val | indent 4 }}
 {{- end }}
 {{- end -}}

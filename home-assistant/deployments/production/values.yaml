@@ -36,25 +36,24 @@ openhasp:
         {"page":1,"id":2,"obj":"btn","x":10,"y":30,"w":105200,"h":90,"toggle":true,"text":"\uE335","text_font":32,"mode":"break","align":1}
         {"page":1,"id":3,"obj":"dropdown","x":10,"y":120,"w":300,"h":60,"options":"Apples\nBananas\nOranges\nMelon"}
         {"page":0,"id":1,"obj":"label","x":700,"y":5,"h":60,"w":100,"text":"00.0°C","align":2,"bg_color":"#2C3E50","text_color":"#FFFFFF"}
-      config:
-        objects: |-
-          - obj: "p0b1"  # temperature label on all pages
-            properties:
-              "text": '{{ states("sensor.my_room_temperature") }}°C'
-          - obj: "p1b2"  # light-switch toggle button
-            properties:
-              "val": '{{ 1 if states("light.my_room") == "on" else 0 }}'
-              "text": '{{ "\uE6E8" if is_state("light.my_room", "on") else "\uE335" | e }}'
-            event:
-              "up":
-                - service: homeassistant.toggle
-                  entity_id: "light.my_room"
-          - obj: "p1b3"  # dropdown
-            event:
-              "changed":
-                - service: persistent_notification.create
-                  data:
-                    message: I like {{ text }}
+      config: |-
+        - obj: "p0b1"  # temperature label on all pages
+          properties:
+            "text": '{{ states("sensor.my_room_temperature") }}°C'
+        - obj: "p1b2"  # light-switch toggle button
+          properties:
+            "val": '{{ 1 if states("light.my_room") == "on" else 0 }}'
+            "text": '{{ "\uE6E8" if is_state("light.my_room", "on") else "\uE335" | e }}'
+          event:
+            "up":
+              - service: homeassistant.toggle
+                entity_id: "light.my_room"
+        - obj: "p1b3"  # dropdown
+          event:
+            "changed":
+              - service: persistent_notification.create
+                data:
+                  message: I like {{ text }}
       
 persistence:
   enabled: true

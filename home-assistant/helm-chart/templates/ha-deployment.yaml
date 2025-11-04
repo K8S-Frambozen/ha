@@ -109,10 +109,10 @@ spec:
         {{- if .Values.openhasp.enabled }}
         - name: openhasp-configs-volume
           configMap:
-            name: {{ include "home-assistant.fullname" . }}-openhasp_configs
+            name: {{ include "home-assistant.fullname" . }}-openhasp-configs
         - name: openhasp-plates-volume
           configMap:
-            name: {{ include "home-assistant.fullname" . }}-openhasp_plates
+            name: {{ include "home-assistant.fullname" . }}-openhasp-plates
         {{- end }}
         {{- end }}
         

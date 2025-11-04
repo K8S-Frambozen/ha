@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: openhasp-{{ $name }}
 data:
-  {{ .name }}.yaml: |-
+  {{ .name }}: |-
 {{ get .Values.openhasp.definitions ( get $val "config" ) | indent 4 }}
 {{- end -}}
 {{- end -}}

@@ -330,7 +330,7 @@ configuration:
     fi
 
     # Check if the openhasp exists
-    openhasp="{{ .Values.openhasp.enabled }}""
+    openhasp="{{ .Values.openhasp.enabled }}"
     if [ ! -d openhasp-configs ]; then
       mkdir openhasp-configs
     fi

@@ -25,7 +25,7 @@ configuration:
 openhasp:
   enabled: true
   plates:
-    - name: plate_4_3
+    plate_4_3:
       layout: S5_800x480
       config: S5_800x480
 

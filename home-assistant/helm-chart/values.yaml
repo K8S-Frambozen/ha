@@ -270,7 +270,7 @@ configuration:
     scene: !include scenes.yaml
 
     {{- if .Values.openhasp.enabled }}
-    opebnhasp: !include_dir_merge_named openhasp_configs
+    openhasp: !include_dir_merge_named openhasp-configs
     {{- end }}
 
   # Init script for the Home Assistant initialization, you can use Go template functions
@@ -334,12 +334,12 @@ configuration:
     if [ ! -d openhasp-configs ]; then
       mkdir openhasp-configs
     fi
-    cp /openhasp-configs/* openhasp-configs
+    cp /openhasp-configs/* /config/openhasp-configs
 
     if [ ! -d openhasp-plates ]; then
       mkdir openhasp-plates
     fi
-    cp /openhasp-plates/* openhasp-plates
+    cp /openhasp-plates/* /config/openhasp-plates
   
 
 

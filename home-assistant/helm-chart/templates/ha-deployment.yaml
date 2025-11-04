@@ -96,7 +96,6 @@ spec:
             {{- end }}
             - mountPath: /config
               name: {{ include "home-assistant.fullname" . }}-pvc
-            {{- end }}
         {{- end }}
       {{- end }}
       volumes:

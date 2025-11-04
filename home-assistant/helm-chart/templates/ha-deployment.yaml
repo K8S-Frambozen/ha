@@ -96,6 +96,7 @@ spec:
             {{- end }}
             - mountPath: /config
               name: {{ include "home-assistant.fullname" . }}-pvc
+            {{- end }}
         {{- end }}
       {{- end }}
       volumes:
@@ -106,7 +107,16 @@ spec:
         - name: config-volume
           configMap:
             name: {{ include "home-assistant.fullname" . }}-configuration
+        {{- if .Values.openhasp.enabled }}
+        - name: openhasp-configs-volume
+          configMap:
+            name: {{ include "home-assistant.fullname" . }}-openhasp_configs
+        - name: openhasp-plates-volume
+          configMap:
+            name: {{ include "home-assistant.fullname" . }}-openhasp_plates
         {{- end }}
+        {{- end }}
+        
         {{- if .Values.persistence.enabled }}
         - name: {{ include "home-assistant.fullname" . }}-pvc
           {{- if and .Values.persistence.hostPath (ne .Values.persistence.storageClass "manual" ) }}

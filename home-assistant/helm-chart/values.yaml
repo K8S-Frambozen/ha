@@ -21,10 +21,16 @@ fullnameOverride: ""
 openhasp:
   enabled: true
   definitions:
-    example_plate1:
-      layout: 1
-      config: 2
-  plates: {}
+    definition1:
+      layout: |-
+        {}
+      config: |-
+        {}
+  plates:
+    plater1:
+      layout: definition1
+      config: definition1
+
     
 
 nats:

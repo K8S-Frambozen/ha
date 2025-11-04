@@ -6,6 +6,6 @@ metadata:
   name: openhasp-{{ . }}
 data:
   {{ .name }}.yaml: |-
-{{ .Values.openhasp.definitions | indent 4 }}
+{{ get .Values.openhasp.definitions .name | indent 4 }}
 {{- end -}}
 {{- end -}}

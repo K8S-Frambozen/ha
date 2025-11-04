@@ -331,12 +331,12 @@ configuration:
 
     # Check if the openhasp exists
     openhasp="{{ .Values.openhasp.enabled }}"
-    if [ ! -d openhasp-configs ]; then
+    if [ ! -d /config/openhasp-configs ]; then
       mkdir openhasp-configs
     fi
     cp /openhasp-configs/* /config/openhasp-configs
 
-    if [ ! -d openhasp-plates ]; then
+    if [ ! -d /config/openhasp-plates ]; then
       mkdir openhasp-plates
     fi
     cp /openhasp-plates/* /config/openhasp-plates

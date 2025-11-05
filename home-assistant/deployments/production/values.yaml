@@ -1,5 +1,5 @@
 image:
-  tag: "2025.10.2"
+  tag: "2025.10.3"
 
 ingress:
   enabled: true

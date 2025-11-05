@@ -1,3 +1,6 @@
+image:
+  tag: "2025.10.3"
+  
 ingress:
   enabled: true
   annotations:

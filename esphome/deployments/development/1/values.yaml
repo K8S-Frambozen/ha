@@ -22,3 +22,4 @@ persistence:
   enabled: true
   size: 5Gi
   storageClass: "nfs-client"
+  accessMode: ReadWriteMany

@@ -40,28 +40,42 @@ spec:
           {{- end }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: PLATFORMIO_CORE_DIR
+              value: /config/.platformio
+            - name: PLATFORMIO_GLOALLIB_DIR
+              value: /config/.platformioLibs
+            - name: ESPOHOME_DASHBOARD_USE_PING
+              value: "true"
+            
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          {{- with .Values.livenessProbe }}
+
           livenessProbe:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.readinessProbe }}
+            httpGet:
+              path: /version
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 30
+
           readinessProbe:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.resources }}
+            httpGet:
+              path: /version
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 30
+
           resources:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.volumeMounts }}
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             {{- if .Values.persistence.enabled }}
             - name: {{ include "esphome.fullname" . }}-pvc
               mountPath: /config
             {{- end }}
+            {{- with .Values.volumeMounts }}
+
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:

@@ -58,10 +58,24 @@ spec:
           {{- end }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
+            {{- if .Values.persistence.enabled }}
+            - name: {{ include "esphome.fullname" . }}-pvc
+              mountPath: /config
+            {{- end }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
-      {{- with .Values.volumes }}
       volumes:
+      {{- if .Values.persistence.enabled }}
+        - name: {{ include "esphome.fullname" . }}-pvc
+          {{- if and .Values.persistence.hostPath (ne .Values.persistence.storageClass "manual" ) }}
+          hostPath:
+            path: {{ .Values.persistence.hostPath }}
+          {{- else }}
+          persistentVolumeClaim:
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "esphome.fullname" . }}-pvc{{- end }}
+          {{- end }}
+        {{- end }}
+        {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.nodeSelector }}

@@ -103,6 +103,16 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+persistance:
+  enabled: false
+  annotations:
+  # existingClaim: esphome-pvc
+  size: 1Gi
+  accessMode: ReadWriteOnce
+  storageClass:
+  hostPath: 
+
+
 # Additional volumes on the output Deployment definition.
 volumes: []
 # - name: foo

@@ -18,3 +18,7 @@ ingress:
       hosts:
         - esphome.dev.k8s-frambozen.nl
       
+persistence:
+  enabled: true
+  size: 5Gi
+  storageClass: "nfs-client"

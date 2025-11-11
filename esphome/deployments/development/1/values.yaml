@@ -12,9 +12,9 @@ ingress:
     - host: esphome.dev.k8s-frambozen.nl
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
   tls:
-    - secretName: home-assistant-tls
+    - secretName: esphome-tls
       hosts:
         - esphome.dev.k8s-frambozen.nl
       

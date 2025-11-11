@@ -20,7 +20,7 @@ ingress:
 configuration:
   enabled: true
   trusted_proxies:
-    - 10.0.0.0/8
+    - 10.42.0.0/8more 
     - 172.16.0.0/12
     - 192.168.0.0/16
     - 127.0.0.0/8
@@ -71,7 +71,7 @@ mosquitto:
   enabled: false
 
 nats:
-  enabled: true
+  enabled: false
   service:
     type: LoadBalancer
 

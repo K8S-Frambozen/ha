@@ -1,0 +1,10 @@
+enabled: true
+  service:
+    type: LoadBalancer
+
+persistence:
+  enabled: true
+  storageClass: "nfs-client"
+  accessModes:
+    - ReadWriteMany
+  size: 10Gi

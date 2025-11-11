@@ -1,0 +1,47 @@
+replicaCount: 1
+
+global:
+  image:
+    # -- if set it will overwrite all registry entries
+    registry:
+    # -- if set it will overwrite all pullPolicy
+    pullPolicy:
+
+mage:
+  registry: docker.io
+  repository: library/nats
+  pullPolicy: IfNotPresent
+  tag: "2.12.0-scratch"
+
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port:
+    nats: 4222
+    mqtt: 1883
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+livenessProbe:
+  tcpSocket:
+    port: nats
+readinessProbe:
+  tcpSocket:
+    port: nats
+
+persistence:
+  enabled: false
+  annotations: {}
+  storageClass:
+
+
+

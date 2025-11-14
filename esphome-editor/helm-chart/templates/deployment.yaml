@@ -51,14 +51,14 @@ spec:
 
           livenessProbe:
             httpGet:
-              path: /version
+              path: /
               port: http
             periodSeconds: 30
             timeoutSeconds: 30
 
           readinessProbe:
             httpGet:
-              path: /version
+              path: /
               port: http
             periodSeconds: 30
             timeoutSeconds: 30

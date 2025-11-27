@@ -18,6 +18,7 @@ ingress:
       hosts:
         - ha.k8s-frambozen.nl
 configuration:
+  forceInit: true
   enabled: true
   trusted_proxies:
     - 10.42.0.0/8

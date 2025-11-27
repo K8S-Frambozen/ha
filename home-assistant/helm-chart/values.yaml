@@ -19,7 +19,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 openhasp:
-  enabled: true
+  enabled: false
   configs: {}
   plates: {}
 

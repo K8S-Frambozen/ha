@@ -367,7 +367,3 @@ configuration:
         subPath: init.sh
       - name: config-volume
         mountPath: /config-templates
-      - name: openhasp-configs-volume
-        mountPath: /openhasp-configs
-      - name: openhasp-plates-volume
-        mountPath: /openhasp-plates

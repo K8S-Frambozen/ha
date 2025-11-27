@@ -280,12 +280,6 @@ configuration:
     #!/bin/bash
     set -e
 
-    git clone https://github.com/RalphSmeets/home-assistant-configuration.git
-    cp -rf home-assistant/home-assistant/* /config/
-    cp -rf home-assistant/.storage/* /config/.storage/
-
-    rm -rf home-assistant-configuration
-
     # Check if the configuration file exists
     if [ ! -f /config/configuration.yaml ]; then
       echo "Configuration file not found, creating a new one"

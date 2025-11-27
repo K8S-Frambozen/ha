@@ -17,9 +17,9 @@ ingress:
     - secretName: home-assistant-tls
       hosts:
         - ha.k8s-frambozen.nl
-        
+
 configuration:
-  forceInit: true
+  forceInit: false
   enabled: true
   trusted_proxies:
     - 10.0.0.0/8

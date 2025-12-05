@@ -1,4 +1,4 @@
-esphome_url: https://esphome.dev.k8s-frambozen.nl:433
+esphome_url: https://esphome.dev.k8s-frambozen.nl
 
 image:
   tag: "0.24.0"

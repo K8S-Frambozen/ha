@@ -1,0 +1,27 @@
+esphome_url: https://esphome.pro.k8s-frambozen.nl:433
+
+image:
+  tag: "0.24.0"
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: 'true'
+  hosts:
+    - host: ee.pro.k8s-frambozen.nl
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: ee-tls
+      hosts:
+        - ee.pro.k8s-frambozen.nl
+      
+persistence:
+  enabled: true
+  size: 5Gi
+  storageClass: "nfs-client"
+  accessMode: ReadWriteMany

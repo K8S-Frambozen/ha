@@ -6,9 +6,7 @@ metadata:
   labels:
     {{- include "wyoming-speech-to-phrase.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "wyoming-speech-to-phrase.selectorLabels" . | nindent 6 }}

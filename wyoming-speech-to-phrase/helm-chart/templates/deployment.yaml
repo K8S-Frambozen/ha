@@ -53,37 +53,17 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - name: config
-              mountPath: /wyoming-speech-to-phrase-server.conf
-              subPath: nats-server.conf
-              readOnly: true
-            {{- if .Values.persistence.enabled }}
-            - name: data
-              mountPath: /var/lib/nats
-            {{- end }}
-            {{- with .Values.volumeMounts }}
-            {{- toYaml . | nindent 12 }}
-            {{- end }}
+            - name: {{ include "wyoming-speech-to-phrase.fullname" . }}-models-pvc
+              mountPath: /models
+            - name: {{ include "wyoming-speech-to-phrase.fullname" . }}-train-pvc
+              mountPath: /train
       volumes:
-        - name: "config"
-          configMap:
-            name: {{ include "wyoming-speech-to-phrase.fullname" . }}
-            items:
-              - key: "server.conf"
-                path: "nats-server.conf"
-        {{- if .Values.persistence.enabled }}
-        - name: "data"
-          {{- if and .Values.persistence.hostPath (ne .Values.persistence.storageClass "manual" ) }}
-          hostPath:
-            path: {{ .Values.persistence.hostPath }}/nats/
-          {{- else }}
+        - name: {{ include "wyoming-speech-to-phrase.fullname" . }}-models-pvc
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "wyoming-speech-to-phrase.fullname" . }}-pvc{{- end }}
-          {{- end }}
-        {{- end }}
-        {{- with .Values.volumes }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
+            claimName: {{ template "wyoming-speech-to-phrase.fullname" . }}-models-pvc
+        - name: {{ include "wyoming-speech-to-phrase.fullname" . }}-train-pvc
+          persistentVolumeClaim:
+            claimName: {{ template "wyoming-speech-to-phrase.fullname" . }}-train-pvc
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

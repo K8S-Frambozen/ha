@@ -9,9 +9,9 @@ global:
 
 image:
   registry: docker.io
-  repository: library/nats
+  repository: rhasspy/wyoming-speech-to-phrase
   pullPolicy: IfNotPresent
-  tag: "2.12.0-scratch"
+  tag: "1.4.1"
 
 
 imagePullSecrets: []
@@ -21,22 +21,21 @@ fullnameOverride: ""
 service:
   type: ClusterIP
   port:
-    nats: 4222
-    mqtt: 1883
+    wyoming: 10300
 resources:
   limits:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 2
+    memory: 3Gb
   requests:
     cpu: 100m
-    memory: 128Mi
+    memory: 1Gb
 
 livenessProbe:
   tcpSocket:
-    port: nats
+    port: wyoming
 readinessProbe:
   tcpSocket:
-    port: nats
+    port: wyoming
 
 persistence:
   enabled: false

@@ -72,3 +72,5 @@ persistence:
   hostPath:
   accessMode: ReadWriteOnce
   size: 16Gi
+
+securityContext: {}

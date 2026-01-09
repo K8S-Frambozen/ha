@@ -73,4 +73,6 @@ persistence:
   accessMode: ReadWriteOnce
   size: 16Gi
 
+podSecurityContext: {}
+
 securityContext: {}

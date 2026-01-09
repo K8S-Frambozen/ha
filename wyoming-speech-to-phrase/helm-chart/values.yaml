@@ -25,10 +25,10 @@ service:
 resources:
   limits:
     cpu: 2
-    memory: 3Gb
+    memory: 3Gi
   requests:
     cpu: 100m
-    memory: 1Gb
+    memory: 1Gi
 
 livenessProbe:
   tcpSocket:

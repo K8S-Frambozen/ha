@@ -39,7 +39,12 @@ spec:
           image: "{{ coalesce $.Values.global.image.registry .registry }}/{{ .repository }}:{{ .tag }}"
           imagePullPolicy: {{ coalesce $.Values.global.image.pullPolicy .pullPolicy }}
           {{- end }}
-          args:
+          args: ["--hass-token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzZTE5NDliMDBjNjQ0MWViOTRiNzY4NzJmNzZkM2IzYSIsImlhdCI6MTc2Nzk1OTkxOCwiZXhwIjoyMDgzMzE5OTE4fQ.AyljTCflsZC_7UMP7zX_4f3BaNqThWnOr2onHbA7kko', "--hass-websocket-uri", "ws://ha-home-assistant:8123/api/websocket"]
+          env:
+            - name: HASS_TOKEN
+              value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzZTE5NDliMDBjNjQ0MWViOTRiNzY4NzJmNzZkM2IzYSIsImlhdCI6MTc2Nzk1OTkxOCwiZXhwIjoyMDgzMzE5OTE4fQ.AyljTCflsZC_7UMP7zX_4f3BaNqThWnOr2onHbA7kko'
+            - name: HASS_WEBSOCKET_URI
+              value: 'ws://ha-home-assistant:8123/api/websocket'
           ports:
             - name: wyoming
               containerPort: 10300

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "piper-tts.fullname" . }}
+  labels:
+    {{- include "piper-tts.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    {{- include "piper-tts.selectorLabels" . | nindent 4 }}
+    type: piper-tts
+  ports:
+    - name: piper
+      port: {{ .Values.service.port.piper }}
+      protocol: TCP
+      targetPort: piper
+    

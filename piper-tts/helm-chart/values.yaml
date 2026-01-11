@@ -1,0 +1,78 @@
+replicaCount: 1
+
+global:
+  image:
+    # -- if set it will overwrite all registry entries
+    registry:
+    # -- if set it will overwrite all pullPolicy
+    pullPolicy:
+
+image:
+  registry: docker.io
+  repository: rhasspy/piper-piper
+  pullPolicy: IfNotPresent
+  tag: "1.3.2"
+
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port:
+    piper: 10200
+resources:
+  limits:
+    cpu: 12000m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+livenessProbe:
+  tcpSocket:
+    port: piper
+  initialDelaySeconds: 30
+  periodSeconds: 10
+
+readinessProbe:
+  tcpSocket:
+    port: piper
+  initialDelaySeconds: 15
+  periodSeconds: 5
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # -- If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+persistence:
+  enabled: true
+  annotations: {}
+  # --  data Persistent Volume Storage Class
+  # If defined, storageClassName: <storageClass>
+  # If set to "-", storageClassName: "", which disables dynamic provisioning
+  # If undefined (the default) or set to null, no storageClassName spec is
+  #   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  #   GKE, AWS & OpenStack)
+  #
+  storageClass:
+
+  # -- A manually managed Persistent Volume and Claim
+  # Requires persistence.enabled: true
+  # If defined, PVC must be created manually before volume will be bound
+  existingClaim:
+
+  ## use container hostPatch or an PV if you set storageClass to manual
+  hostPath:
+  accessMode: ReadWriteOnce
+  size: 4Gi
+
+podSecurityContext: {}
+
+securityContext: {}

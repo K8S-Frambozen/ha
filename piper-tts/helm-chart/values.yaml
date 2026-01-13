@@ -9,7 +9,7 @@ global:
 
 image:
   registry: docker.io
-  repository: rhasspy/piper-piper
+  repository: rhasspy/wyoming-piper
   pullPolicy: IfNotPresent
   tag: "1.3.2"
 

@@ -39,12 +39,14 @@ spec:
           image: "{{ coalesce $.Values.global.image.registry .registry }}/{{ .repository }}:{{ .tag }}"
           imagePullPolicy: {{ coalesce $.Values.global.image.pullPolicy .pullPolicy }}
           {{- end }}
-          args:
+          args: 
             - --voice
-            - en_GB-alba-medium
+            - nl_NL-mls-medium
+            - --speaker 8
+            - --update-voices
           env:
             - name: TZ
-              value: Europe/Athens
+              value: Europe/Amsterdam
           ports:
             - name: piper
               containerPort: 10200

@@ -42,7 +42,8 @@ spec:
           args: 
             - --voice
             - nl_NL-mls-medium
-            - --speaker 8
+            - --speaker
+            - 8
             - --update-voices
           env:
             - name: TZ

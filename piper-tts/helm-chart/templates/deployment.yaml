@@ -43,7 +43,7 @@ spec:
             - --voice
             - nl_NL-mls-medium
             - --speaker
-            - 8
+            - '8'
             - --update-voices
           env:
             - name: TZ

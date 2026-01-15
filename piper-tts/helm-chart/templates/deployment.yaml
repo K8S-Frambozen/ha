@@ -41,9 +41,9 @@ spec:
           {{- end }}
           args: 
             - --voice
-            - nl_NL-mls-medium
-            - --speaker
-            - '8'
+            - nl_NL-mls_5809-medium
+            - --max-piper-procs
+            - "6"
             - --update-voices
           env:
             - name: TZ

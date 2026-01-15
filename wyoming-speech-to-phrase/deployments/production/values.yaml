@@ -1,1 +1,7 @@
 ---
+persistence:
+  enabled: true
+  storageClass: "nfs-client"
+  accessModes:
+    - ReadWriteMany
+  size: 16Gi

@@ -21,7 +21,7 @@ fullnameOverride: ""
 service:
   type: ClusterIP
   port:
-    whisper: 10200
+    whisper: 10300
 resources:
   limits:
     cpu: 12000m

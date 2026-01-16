@@ -24,10 +24,10 @@ service:
     wyoming: 10300
 resources:
   limits:
-    cpu: 2
-    memory: 3Gi
+    cpu: 2000m
+    memory: 2Gi
   requests:
-    cpu: 100m
+    cpu: 500m
     memory: 1Gi
 
 livenessProbe:

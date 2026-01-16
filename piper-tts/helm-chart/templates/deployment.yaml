@@ -41,6 +41,8 @@ spec:
           {{- end }}
           args: 
             - --update-voices
+            - --voice
+            - nl_NL-mls_5809-low
           env:
             - name: TZ
               value: Europe/Amsterdam

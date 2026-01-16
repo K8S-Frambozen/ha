@@ -1,5 +1,4 @@
 ---
----
 persistence:
   enabled: true
   storageClass: "nfs-client"

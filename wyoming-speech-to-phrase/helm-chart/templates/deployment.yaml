@@ -44,8 +44,10 @@ spec:
             - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzZTE5NDliMDBjNjQ0MWViOTRiNzY4NzJmNzZkM2IzYSIsImlhdCI6MTc2Nzk1OTkxOCwiZXhwIjoyMDgzMzE5OTE4fQ.AyljTCflsZC_7UMP7zX_4f3BaNqThWnOr2onHbA7kko
             - --hass-websocket-uri
             - ws://ha-home-assistant:8123/api/websocket
-            - --train-dir /train
-            - --model-dir /models
+            - --train-dir
+            - /train
+            - --model-dir 
+            - /models
             - --retrain-on-start
           ports:
             - name: wyoming

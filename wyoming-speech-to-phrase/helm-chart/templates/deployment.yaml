@@ -49,6 +49,9 @@ spec:
             - name: wyoming
               containerPort: 10300
               protocol: TCP
+            - name: https
+              containerPort: 8099
+              protocol: TCP
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:

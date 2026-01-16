@@ -14,4 +14,9 @@ spec:
       port: {{ .Values.service.port.wyoming }}
       protocol: TCP
       targetPort: wyoming
+    - name: http
+      port: {{ .Values.service.port.http }}
+      protocol: TCP
+      targetPort: http
+
     

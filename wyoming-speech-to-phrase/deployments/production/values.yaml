@@ -6,7 +6,7 @@ persistence:
     - ReadWriteMany
   size: 16Gi
 
-  ingress:
+ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: traefik

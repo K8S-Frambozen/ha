@@ -40,8 +40,6 @@ spec:
           imagePullPolicy: {{ coalesce $.Values.global.image.pullPolicy .pullPolicy }}
           {{- end }}
           args: 
-            - --voice
-            - nl_NL-mls_5809-medium
             - --update-voices
           env:
             - name: TZ

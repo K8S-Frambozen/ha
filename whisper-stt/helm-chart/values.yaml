@@ -24,11 +24,11 @@ service:
     whisper: 10300
 resources:
   limits:
-    cpu: 12000m
-    memory: 512Mi
+    cpu: 4000m
+    memory: 2Gi
   requests:
     cpu: 200m
-    memory: 256Mi
+    memory: 1Gi
 
 livenessProbe:
   tcpSocket:

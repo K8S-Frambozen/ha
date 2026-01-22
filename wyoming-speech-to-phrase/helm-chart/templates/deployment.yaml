@@ -49,6 +49,9 @@ spec:
             - --models-dir 
             - /models
             - --retrain-on-start
+            - --debug
+            - --tools_dir
+            - /usr/src/tools
           ports:
             - name: wyoming
               containerPort: 10300

@@ -41,7 +41,7 @@ spec:
           {{- end }}
           args:
             - --model
-            - small
+            - tiny-int8
             - --language
             - nl
             - --beam-size

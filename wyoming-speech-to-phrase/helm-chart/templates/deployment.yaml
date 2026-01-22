@@ -50,7 +50,7 @@ spec:
             - /models
             - --retrain-on-start
             - --debug
-            - --tools_dir
+            - --tools-dir
             - /usr/src/tools
           ports:
             - name: wyoming

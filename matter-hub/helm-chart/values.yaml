@@ -9,9 +9,9 @@ global:
 
 image:
   registry: gchr.io
-  repository: matter-js/python-matter-server
+  repository: t0bst4r/home-assistant-matter-hub
   pullPolicy: Always
-  tag: "stable"
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -20,7 +20,7 @@ fullnameOverride: ""
 service:
   type: ClusterIP
   port:
-    matter: 4222
+    matter: 8482
 resources:
   limits:
     cpu: 100m

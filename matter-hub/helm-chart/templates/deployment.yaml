@@ -41,9 +41,18 @@ spec:
           image: "{{ coalesce $.Values.global.image.registry .registry }}/{{ .repository }}:{{ .tag }}"
           imagePullPolicy: {{ coalesce $.Values.global.image.pullPolicy .pullPolicy }}
           {{- end }}
+          environment:
+            - name: HAMH_HOME_ASSISTANT_URL
+              value: http://ha-home-assistant:8123/
+            - name: HAMH_HOME_ASSISTANT_TACCES_TOKEN
+              value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzZTE5NDliMDBjNjQ0MWViOTRiNzY4NzJmNzZkM2IzYSIsImlhdCI6MTc2Nzk1OTkxOCwiZXhwIjoyMDgzMzE5OTE4fQ.AyljTCflsZC_7UMP7zX_4f3BaNqThWnOr2onHbA7kko
+            - name: HAMH_LOG_LEVEL
+              value: info
+            - name: HAMH_HTTP_PORT
+              value: 8482
           ports:
             - name: matter
-              containerPort: 4222
+              containerPort: 8482
               protocol: TCP
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
@@ -52,29 +61,18 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - name: config
-              mountPath: /matter-server.conf
-              subPath: matter-server.conf
-              readOnly: true
-            {{- if .Values.persistence.enabled }}
             - name: data
-              mountPath: /var/lib/matter
+              mountPath: /data
             {{- end }}
             {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
       volumes:
-        - name: "config"
-          configMap:
-            name: {{ include "matter.fullname" . }}
-            items:
-              - key: "server.conf"
-                path: "matter-server.conf"
         {{- if .Values.persistence.enabled }}
         - name: "data"
           {{- if and .Values.persistence.hostPath (ne .Values.persistence.storageClass "manual" ) }}
           hostPath:
-            path: {{ .Values.persistence.hostPath }}/matter/
+            path: {{ .Values.persistence.hostPath }}/matter-hub/
           {{- else }}
           persistentVolumeClaim:
             claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "matter.fullname" . }}-pvc{{- end }}

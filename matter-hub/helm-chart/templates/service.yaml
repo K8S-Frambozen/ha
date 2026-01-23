@@ -14,7 +14,3 @@ spec:
       port: {{ .Values.service.port.matter }}
       protocol: TCP
       targetPort: matter
-    - name: mqtt
-      port: {{ .Values.service.port.mqtt }}
-      protocol: TCP
-      targetPort: mqtt  

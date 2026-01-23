@@ -1,8 +1,8 @@
 apiVersion: v2
-name: matter-server
-description: Matter Server
+name: matter-hub
+description: Matter Hub
 icon: https://www.matter.io/images/favicon-192x192.png
 type: application
 version: "0.1"
-# renovate: image=ghcr.io/matter-js/python-matter-server
+# renovate: image=ghcr.io/t0bst4r/home-assistant-matter-hub:latest
 appVersion: "stable"

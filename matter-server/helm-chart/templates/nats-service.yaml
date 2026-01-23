@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "matter.fullname" . }}
+  labels:
+    {{- include "matter.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    {{- include "matter.selectorLabels" . | nindent 4 }}
+    type: matter
+  ports:
+    - name: matter
+      port: {{ .Values.service.port.matter }}
+      protocol: TCP
+      targetPort: matter
+    - name: mqtt
+      port: {{ .Values.service.port.mqtt }}
+      protocol: TCP
+      targetPort: mqtt  

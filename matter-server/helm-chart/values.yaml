@@ -1,0 +1,45 @@
+replicaCount: 1
+
+global:
+  image:
+    # -- if set it will overwrite all registry entries
+    registry:
+    # -- if set it will overwrite all pullPolicy
+    pullPolicy:
+
+image:
+  registry: gchr.io
+  repository: matter-js/python-matter-server
+  pullPolicy: Always
+  tag: "stable"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port:
+    matter: 4222
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+livenessProbe:
+  tcpSocket:
+    port: matter
+readinessProbe:
+  tcpSocket:
+    port: matter
+
+persistence:
+  enabled: false
+  annotations: {}
+  storageClass:
+
+
+

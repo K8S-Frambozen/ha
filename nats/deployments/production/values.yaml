@@ -1,6 +1,5 @@
-enabled: true
-  service:
-    type: LoadBalancer
+service:
+  type: LoadBalancer
 
 persistence:
   enabled: true

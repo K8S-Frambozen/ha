@@ -8,7 +8,7 @@ global:
     pullPolicy:
 
 image:
-  registry: gchr.io
+  registry: ghcr.io
   repository: t0bst4r/home-assistant-matter-hub
   pullPolicy: Always
   tag: "latest"

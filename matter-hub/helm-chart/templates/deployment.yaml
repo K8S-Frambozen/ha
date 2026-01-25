@@ -2,14 +2,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "matter.fullname" . }}
+  name: {{ include "matter-hub.fullname" . }}
   labels:
-    {{- include "matter.labels" . | nindent 4 }}
+    {{- include "matter-hub.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "matter.selectorLabels" . | nindent 6 }}
+      {{- include "matter-hub.selectorLabels" . | nindent 6 }}
       type: matter
   template:
     metadata:
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "matter.labels" . | nindent 8 }}
+        {{- include "matter-hub.labels" . | nindent 8 }}
         type: matter
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
@@ -71,7 +71,7 @@ spec:
             path: {{ .Values.persistence.hostPath }}/matter-hub/
           {{- else }}
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "matter.fullname" . }}-data-pvc{{- end }}
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "matter-hub.fullname" . }}-data-pvc{{- end }}
           {{- end }}
         {{- end }}
         {{- with .Values.volumes }}

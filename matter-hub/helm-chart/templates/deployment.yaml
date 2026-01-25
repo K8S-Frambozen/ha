@@ -41,7 +41,7 @@ spec:
           env:
             - name: HAMH_HOME_ASSISTANT_URL
               value: http://ha-home-assistant:8123/
-            - name: HAMH_HOME_ASSISTANT_TACCES_TOKEN
+            - name: HAMH_HOME_ASSISTANT_ACCES_TOKEN
               value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzZTE5NDliMDBjNjQ0MWViOTRiNzY4NzJmNzZkM2IzYSIsImlhdCI6MTc2Nzk1OTkxOCwiZXhwIjoyMDgzMzE5OTE4fQ.AyljTCflsZC_7UMP7zX_4f3BaNqThWnOr2onHbA7kko
             - name: HAMH_LOG_LEVEL
               value: debug

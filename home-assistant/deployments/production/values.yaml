@@ -30,8 +30,7 @@ configuration:
 persistence:
   enabled: true
   storageClass: "nfs-client"
-  accessModes:
-    - ReadWriteMany
+  accessModes: ReadWriteMany
   size: 100Gi
 
 mosquitto:

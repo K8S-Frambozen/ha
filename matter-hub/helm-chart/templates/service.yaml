@@ -14,3 +14,7 @@ spec:
       port: {{ .Values.service.port.matter }}
       protocol: TCP
       targetPort: matter
+    - name: http
+      port: {{ .Values.service.port.http }}
+      protocol: TCP
+      targetPort: http

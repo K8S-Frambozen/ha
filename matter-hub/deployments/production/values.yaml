@@ -4,6 +4,6 @@ service:
 persistence:
   enabled: true
   storageClass: "nfs-client"
-  accessModes:
+  accessMode:
     - ReadWriteMany
   size: 10Gi

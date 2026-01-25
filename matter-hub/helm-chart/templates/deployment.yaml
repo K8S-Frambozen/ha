@@ -71,7 +71,7 @@ spec:
             path: {{ .Values.persistence.hostPath }}/matter-hub/
           {{- else }}
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "matter.fullname" . }}-pvc{{- end }}
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "matter.fullname" . }}-data-pvc{{- end }}
           {{- end }}
         {{- end }}
         {{- with .Values.volumes }}

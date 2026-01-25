@@ -17,7 +17,7 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-ngress:
+ingress:
   enabled: false
   className: ""
   annotations: {}
@@ -51,11 +51,14 @@ livenessProbe:
   httpGet:
     path: /
     port: http
+  initialDelaySeconds: 120
+
 
 readinessProbe:
   httpGet:
     path: /
     port: http
+  initialDelaySeconds: 120
 
 persistence:
   enabled: false

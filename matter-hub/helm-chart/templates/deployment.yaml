@@ -46,14 +46,20 @@ spec:
             - name: HAMH_LOG_LEVEL
               value: debug
             - name: HAMH_HTTP_PORT
-              value: "80" 
+              value: 8482 
           ports:
             - name: http
-              containerPort: {{ .Values.service.port.http }}
+              containerPort: 8482
               protocol: TCP
-            - name: matter
-              containerPort: {{ .Values.service.port.matter }}
+            - name: tcp-matter
+              containerPort: 5540
               protocol: TCP
+            - name: udp-matter
+              containerPort: 5540
+              protocol: UDP
+            - name: mDNS
+              containerPort: 5353
+              protocol: UDP
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:

@@ -27,8 +27,15 @@ spec:
     {{- include "matter-hub.selectorLabels" . | nindent 4 }}
     type: matter
   ports:
-    - name: matter
-      port: {{ .Values.service.port.matter }}
+    - name: udp-matter
+      port: 5540
+      protocol: UDP
+      targetPort: udp-matter
+    - name: mdns
+      port: 5353
+      protocol: UDP
+      targetPort: mdns
+    - name: tcp-matter
+      port: 5540
       protocol: TCP
-      targetPort: matter
-   
+      targetPort: tcp-matter

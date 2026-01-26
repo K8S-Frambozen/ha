@@ -36,7 +36,6 @@ ingress:
 service:
   type: ClusterIP
   port:
-    matter: 5540
     http: 80
   
 resources:

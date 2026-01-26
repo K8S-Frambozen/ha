@@ -46,7 +46,7 @@ spec:
             - name: HAMH_LOG_LEVEL
               value: debug
             - name: HAMH_HTTP_PORT
-              value: "8482
+              value: "8482"
           ports:
             - name: http
               containerPort: 8482

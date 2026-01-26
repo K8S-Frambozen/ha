@@ -1,5 +1,5 @@
 service:
-  type: ClusterIP
+  type: CLusterIP
 
 persistence:
   enabled: true
@@ -15,11 +15,11 @@ ingress:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: 'true'
   hosts:
-    - host: matter.pro.k8s-frambozen.nl
+    - host: matter.dev.k8s-frambozen.nl
       paths:
         path: /
         pathType: ImplementationSpecific
   tls:
     - secretName: matter-hub-tls
       hosts:
-        - matter.pro.k8s-frambozen.nl
+        - matter.dev.k8s-frambozen.nl

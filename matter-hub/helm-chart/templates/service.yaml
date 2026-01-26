@@ -8,7 +8,7 @@ spec:
   type: {{ .Values.service.type }}
   selector:
     {{- include "matter-hub.selectorLabels" . | nindent 4 }}
-    type: matter
+    type: http
   ports:
     - name: http
       port: {{ .Values.service.port.http }}

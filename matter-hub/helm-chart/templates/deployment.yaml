@@ -57,7 +57,7 @@ spec:
             - name: udp-matter
               containerPort: 5540
               protocol: UDP
-            - name: mDNS
+            - name: mdns
               containerPort: 5353
               protocol: UDP
           livenessProbe:

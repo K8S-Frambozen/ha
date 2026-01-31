@@ -8,7 +8,7 @@ spec:
   type: LoadBalancer
   selector:
     {{- include "matter-server.selectorLabels" . | nindent 4 }}
-    type: matter
+    type: matter-server
   ports:
     - name: udp-matter
       port: 5540

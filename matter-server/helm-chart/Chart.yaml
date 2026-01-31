@@ -1,0 +1,8 @@
+apiVersion: v2
+name: matter-server
+description: Matter Server
+icon: https://www.matter.io/images/favicon-192x192.png
+type: application
+version: "0.1"
+# renovate: image=gghcr.io/home-assistant-libs/python-matter-server:stable
+appVersion: "stable"

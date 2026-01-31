@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "matter-server.fullname" . }}-matter
+  labels:
+    {{- include "matter-server.labels" . | nindent 4 }}
+spec:
+  type: LoadBalancer
+  selector:
+    {{- include "matter-server.selectorLabels" . | nindent 4 }}
+    type: matter
+  ports:
+    - name: udp-matter
+      port: 5540
+      protocol: UDP
+      targetPort: udp-matter
+    - name: tcp-matter
+      port: 5540
+      protocol: TCP
+      targetPort: tcp-matter

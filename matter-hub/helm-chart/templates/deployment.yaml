@@ -10,7 +10,6 @@ spec:
   selector:
     matchLabels:
       {{- include "matter-hub.selectorLabels" . | nindent 6 }}
-      type: matter-hub
   template:
     metadata:
       {{- with .Values.podAnnotations }}

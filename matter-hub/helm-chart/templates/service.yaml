@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "matter-hub.fullname" . }}
+  name: {{ include "matter-hub.fullname" . }}-matter
   labels:
     {{- include "matter-hub.labels" . | nindent 4 }}
 spec:
@@ -25,7 +25,7 @@ spec:
 piVersion: v1
 kind: Service
 metadata:
-  name: {{ include "matter-hub.fullname" . }}
+  name: {{ include "matter-hub.fullname" . }}-http
   labels:
     {{- include "matter-hub.labels" . | nindent 4 }}
 spec:

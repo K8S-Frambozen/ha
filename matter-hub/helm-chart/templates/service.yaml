@@ -10,10 +10,6 @@ spec:
     {{- include "matter-hub.selectorLabels" . | nindent 4 }}
     type: matter-hub
   ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: http
     - name: udp-matter
       port: 5540
       protocol: UDP
@@ -26,3 +22,20 @@ spec:
       port: 5540
       protocol: TCP
       targetPort: tcp-matter
+---
+piVersion: v1
+kind: Service
+metadata:
+  name: {{ include "matter-hub.fullname" . }}
+  labels:
+    {{- include "matter-hub.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "matter-hub.selectorLabels" . | nindent 4 }}
+    type: matter-hub
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http

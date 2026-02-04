@@ -41,7 +41,7 @@ spec:
           {{- end }}
           args:
             - --model
-            - tiny-int8
+            - Systran/faster-whisper-base-nl
             - --language
             - nl
             - --beam-size

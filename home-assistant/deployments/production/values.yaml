@@ -9,14 +9,14 @@ ingress:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: 'true'
   hosts:
-    - host: ha.k8s-frambozen.nl
+    - host: ha.pro.k8s-frambozen.nl
       paths:
         path: /
         pathType: ImplementationSpecific
   tls:
     - secretName: home-assistant-tls
       hosts:
-        - ha.k8s-frambozen.nl
+        - ha.pro.k8s-frambozen.nl
 
 configuration:
   forceInit: false

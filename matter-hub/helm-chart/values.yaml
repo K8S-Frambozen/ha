@@ -36,7 +36,7 @@ ingress:
 service:
   type: ClusterIP
   port:
-    http: 80
+    http: 8484
   
 resources:
   limits:

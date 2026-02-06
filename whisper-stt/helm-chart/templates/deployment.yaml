@@ -41,7 +41,7 @@ spec:
           {{- end }}
           args:
             - --model
-            - Systran/faster-whisper-base.nl
+            - "Systran/faster-whisper-base.nl"
             - --language
             - nl
             - --beam-size

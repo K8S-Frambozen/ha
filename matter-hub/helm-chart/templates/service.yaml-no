@@ -22,7 +22,7 @@ spec:
       protocol: TCP
       targetPort: tcp-matter
 ---
-piVersion: v1
+apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "matter-hub.fullname" . }}-http
